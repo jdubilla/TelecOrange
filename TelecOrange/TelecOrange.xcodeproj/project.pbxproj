@@ -10,9 +10,22 @@
 		ED9C87352CDE3701003969CF /* TelecOrange.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TelecOrange.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		ED9C87562CDE89E7003969CF /* Exceptions for "TelecOrange" folder in "TelecOrange" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = ED9C87342CDE3701003969CF /* TelecOrange */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		ED9C87372CDE3701003969CF /* TelecOrange */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				ED9C87562CDE89E7003969CF /* Exceptions for "TelecOrange" folder in "TelecOrange" target */,
+			);
 			path = TelecOrange;
 			sourceTree = "<group>";
 		};
@@ -255,6 +268,7 @@
 				DEVELOPMENT_TEAM = K6C5P3CXYZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TelecOrange/Info.plist;
 				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Cette application nécessite un accès au réseau local pour contrôler votre décodeur Box Orange TV.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -286,6 +300,7 @@
 				DEVELOPMENT_TEAM = K6C5P3CXYZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TelecOrange/Info.plist;
 				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Cette application nécessite un accès au réseau local pour contrôler votre décodeur Box Orange TV.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
