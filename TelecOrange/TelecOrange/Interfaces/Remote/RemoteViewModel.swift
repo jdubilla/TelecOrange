@@ -30,13 +30,15 @@ enum RemoteKey: String {
     case power = "116"
     case volumeDown = "114"
     case volumeUp = "115"
+    case back = "158"
+    case mute = "113"
 }
 
 class RemoteViewModel: ObservableObject {
     @Published var showToast = false
     
     func sendTVCommand(key: RemoteKey) {
-        guard let url = URL(string: "http://192.168.1.21:8080/remoteControl/cmd?operation=01&key=\(key)&mode=0") else {
+        guard let url = URL(string: "http://192.168.1.21:8080/remoteControl/cmd?operation=01&key=\(key.rawValue)&mode=0") else {
             DispatchQueue.main.async {
                 self.showToast = true
             }
