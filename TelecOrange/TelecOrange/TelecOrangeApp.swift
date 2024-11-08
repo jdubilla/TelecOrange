@@ -11,7 +11,7 @@ import SwiftUI
 struct TelecOrangeApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RemoteView()
         }
     }
 }
