@@ -9,9 +9,17 @@ import SwiftUI
 
 @main
 struct TelecOrangeApp: App {
+    
+    @StateObject var screenRootManager = ScreenRootManager.shared
+    
     var body: some Scene {
         WindowGroup {
-            RemoteView()
+            switch screenRootManager.screenRoot {
+            case .onboarding:
+                OnboardingView()
+            case .content:
+                RemoteView()
+            }
         }
     }
 }

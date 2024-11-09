@@ -1,0 +1,166 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "onboarding_description" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sur le prochain écran, autorisez l’accès au réseau pour que l’app puisse se connecter à votre Box TV. C’est indispensable pour faire fonctionner la télécommande."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sur le prochain écran, autorisez l’accès au réseau pour que l’app puisse se connecter à votre Box TV. C’est indispensable pour faire fonctionner la télécommande."
+          }
+        }
+      }
+    },
+    "onboarding_finish" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Terminer"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Terminer"
+          }
+        }
+      }
+    },
+    "onboarding_network" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connexion au Wi-Fi de votre Box TV"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connexion au Wi-Fi de votre Box TV"
+          }
+        }
+      }
+    },
+    "onboarding_network_description" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pour contrôler votre Box TV, assurez-vous que votre téléphone est connecté au réseau Wi-Fi. Cela permet une communication directe et sécurisée entre les appareils."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pour contrôler votre Box TV, assurez-vous que votre téléphone est connecté au réseau Wi-Fi. Cela permet une communication directe et sécurisée entre les appareils."
+          }
+        }
+      }
+    },
+    "onboarding_next" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continuer"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continuer"
+          }
+        }
+      }
+    },
+    "onboarding_welcome" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bienvenue !"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bienvenue !"
+          }
+        }
+      }
+    },
+    "remote_many_ips_found" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plusieurs équipements ont été détectées et peuvent correspondre a votre box orange. Merci de les tester pour trouver celle qui correspondant à votre Box TV."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plusieurs équipements ont été détectées et peuvent correspondre a votre box orange. Merci de les tester pour trouver celle qui correspondant à votre Box TV."
+          }
+        }
+      }
+    },
+    "remote_scan_ips" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rechercher ma box TV"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rechercher ma box TV"
+          }
+        }
+      }
+    },
+    "remote_settings" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La télécommande ne fonctionne pas ? Lancez un nouveau scan en appuyant sur le bouton pour rechercher les équipements disponibles."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La télécommande ne fonctionne pas ? Lancez un nouveau scan en appuyant sur le bouton pour rechercher les équipements disponibles."
+          }
+        }
+      }
+    },
+    "toast_error_label" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Une erreur est survenue"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Une erreur est survenue"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

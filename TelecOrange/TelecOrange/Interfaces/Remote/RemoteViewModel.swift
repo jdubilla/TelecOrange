@@ -7,15 +7,27 @@
 
 import SwiftUI
 
-// MARK: - Enum for Keys
+// MARK: - Enum for Remote Keys
 enum RemoteKey: String {
+    // Navigation Keys
+    case arrowUp = "103"
     case arrowDown = "108"
     case arrowLeft = "105"
     case arrowRight = "106"
-    case arrowUp = "103"
-    case channelDown = "403"
-    case channelUp = "402"
+    case ok = "352"
     case home = "139"
+    case back = "158"
+
+    // Volume Controls
+    case volumeUp = "115"
+    case volumeDown = "114"
+    case mute = "113"
+
+    // Channel Controls
+    case channelUp = "402"
+    case channelDown = "403"
+
+    // Number Keys
     case number0 = "512"
     case number1 = "513"
     case number2 = "514"
@@ -26,19 +38,26 @@ enum RemoteKey: String {
     case number7 = "519"
     case number8 = "520"
     case number9 = "521"
-    case ok = "352"
+
+    // Playback Controls
+    case playPause = "164"
+    case fastForward = "159"
+    case rewind = "168"
+    case record = "167"
+
+    // Power Control
     case power = "116"
-    case volumeDown = "114"
-    case volumeUp = "115"
-    case back = "158"
-    case mute = "113"
 }
 
 class RemoteViewModel: ObservableObject {
     @Published var showToast = false
+    @Published var showSheet = false
+    @Published var showSettingsSheet = false
+    @Published var selectedIps: [String] = []
+    @AppStorage("boxIp") var boxIp: String = ""
     
     func sendTVCommand(key: RemoteKey) {
-        guard let url = URL(string: "http://192.168.1.21:8080/remoteControl/cmd?operation=01&key=\(key.rawValue)&mode=0") else {
+        guard let url = URL(string: "http://\(boxIp):8080/remoteControl/cmd?operation=01&key=\(key.rawValue)&mode=0") else {
             DispatchQueue.main.async {
                 self.showToast = true
             }
@@ -68,5 +87,28 @@ class RemoteViewModel: ObservableObject {
     func generateTapticFeedback() {
         let generator = UIImpactFeedbackGenerator(style: .light)
         generator.impactOccurred()
+    }
+    
+    func scanIpIfNeed() {
+        if boxIp.isEmpty {
+            selectedIps = []
+            Task { @MainActor in
+                let ips = await NetworkHelper.checkAllIPs()
+                if ips.count == 1, let ip = ips.first {
+                    boxIp = ip
+                } else if ips.count > 1 {
+                    selectedIps = ips
+                    showSheet = true
+                }
+            }
+        }
+    }
+    
+    func resetBoxIp() {
+        boxIp = ""
+    }
+    
+    func setBoxIp(ip: String) {
+        boxIp = ip
     }
 }

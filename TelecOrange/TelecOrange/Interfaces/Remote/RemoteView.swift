@@ -13,17 +13,21 @@ struct RemoteView: View {
     
     var body: some View {
         ScrollView {
-            HomeAndPowerView()
-            
-            ChannelVolueAndControlPadView()
-            
-            GridNumbersView()
+            VStack(spacing: 0) {
+                HomeAndPowerView()
+                
+                ChannelVolueAndControlPadView()
+                
+                PlayerControlsView()
+                
+                GridNumbersView()
+            }
+            .padding(.horizontal)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .padding(.horizontal)
         .background(.grayLight)
         .onAppear {
-            NetworkHelper.checkAllIPs()
+            vm.scanIpIfNeed()
         }
         .onChange(of: vm.showToast) { newValue in
             guard newValue else { return }
@@ -34,6 +38,12 @@ struct RemoteView: View {
                 .padding(.top, 20),
             alignment: .top
         )
+        .sheet(isPresented: $vm.showSheet) {
+            IPSelectionView()
+        }
+        .sheet(isPresented: $vm.showSettingsSheet) {
+            SettingsView()
+        }
     }
 }
 
@@ -47,13 +57,11 @@ extension RemoteView {
     @ViewBuilder
     private func HomeAndPowerView() -> some View {
         VStack(spacing: 8) {
-            Image(systemName: "tv")
-            
             HStack(spacing: 0) {
                 ImageButtonView(
                     image: "speaker.slash.fill",
                     colorImage: .white,
-                    key: .home
+                    key: .mute
                 )
                 
                 Spacer()
@@ -139,7 +147,7 @@ extension RemoteView {
                     
                     Spacer()
                     
-                    Button("Ok") {
+                    Button("Ok".excludeLocalization) {
                         vm.generateTapticFeedback()
                         vm.sendTVCommand(key: .ok)
                     }
@@ -202,6 +210,17 @@ extension RemoteView {
                 Spacer()
                 
                 TextButtonView(text: "0", key: .number0)
+
+                Button {
+                    vm.showSettingsSheet = true
+                } label: {
+                    Image(systemName: "gearshape.fill")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 40, height: 40)
+                        .foregroundStyle(.white)
+                }
+
                 
                 Spacer()
             }
@@ -292,11 +311,80 @@ extension RemoteView {
             }
     }
     
+    // MARK: PlayerControlsView
+    @ViewBuilder
+    private func PlayerControlsView() -> some View {
+        VStack(spacing: 0) {
+            HStack(spacing: 0) {
+                ImageButtonView(
+                    image: "backward.fill",
+                    colorImage: .white,
+                    key: .rewind
+                )
+                
+                Spacer()
+                
+                ImageButtonView(
+                    image: "playpause.fill",
+                    colorImage: .white,
+                    key: .playPause
+                )
+                
+                Spacer()
+                
+                ImageButtonView(
+                    image: "forward.fill",
+                    colorImage: .white,
+                    key: .fastForward
+                )
+                
+                Spacer()
+                
+                ImageButtonView(
+                    image: "record.circle",
+                    colorImage: .red,
+                    key: .record
+                )
+            }
+        }
+    }
+    
+    // MARK: IPSelectionView
+    @ViewBuilder
+    private func IPSelectionView() -> some View {
+        VStack(spacing: 0) {
+            Text("remote_many_ips_found")
+                .font(.title2)
+                .fontWeight(.bold)
+                .multilineTextAlignment(.center)
+                .padding(.vertical)
+
+            ForEach(vm.selectedIps, id: \ .self) { ip in
+                VStack(spacing: 8) {
+                    Text(ip)
+                        .font(.title3)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    Divider()
+                }
+                .padding(.top)
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    vm.setBoxIp(ip: ip)
+                    vm.showSheet = false
+                }
+            }
+            
+            Spacer()
+        }
+        .padding()
+    }
+    
     // MARK: ToastView
     @ViewBuilder
     private func ToastView() -> some View {
         VStack {
-            Text("Une erreur est survenue")
+            Text("toast_error_label")
                 .padding()
                 .background(Color.red)
                 .cornerRadius(8)
@@ -306,5 +394,27 @@ extension RemoteView {
                     vm.showToast = false
                 }
         }
+    }
+    
+    // MARK: SettingsView
+    @ViewBuilder
+    private func SettingsView() -> some View {
+        VStack(spacing: 0) {
+            Text("remote_settings")
+                .font(.title2)
+                .fontWeight(.bold)
+                .multilineTextAlignment(.center)
+                .padding(.vertical)
+            
+            Button("remote_scan_ips") {
+                vm.resetBoxIp()
+                vm.scanIpIfNeed()
+                vm.showSettingsSheet = false
+            }
+            .buttonStyle(NextButtonStyle())
+            .padding(.top)
+            
+        }
+        .padding()
     }
 }

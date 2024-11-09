@@ -5,11 +5,13 @@
 //  Created by Jean-baptiste DUBILLARD on 08/11/2024.
 //
 
-import Foundation
+import SwiftUI
 import Network
 
 class NetworkHelper {
-    static func checkAllIPs() {
+    
+    @discardableResult
+    static func checkAllIPs() async -> [String] {
         var reachableIPs: [String] = []
         
         let group = DispatchGroup()
@@ -26,10 +28,8 @@ class NetworkHelper {
             }
         }
         
-        group.notify(queue: .main) {
-            print("Reachable IPs on port 8080:")
-            reachableIPs.forEach { print($0) }
-        }
+        try? await Task.sleep(nanoseconds: 2_000_000_000)
+        return reachableIPs
     }
     
     private static func checkConnectionToIP(ip: String, port: UInt16, completion: @escaping (String?) -> Void) {
@@ -40,7 +40,6 @@ class NetworkHelper {
         connection.stateUpdateHandler = { state in
             switch state {
             case .ready:
-                print("\(ip) is reachable on port \(port).")
                 completion(ip)
             case .failed(_):
                 completion(nil)
@@ -48,9 +47,7 @@ class NetworkHelper {
                 break
             }
         }
-        
         connection.start(queue: .global())
-        
         DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
             connection.cancel()
         }
