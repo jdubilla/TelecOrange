@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "" : {
+
+    },
     "onboarding_description" : {
       "localizations" : {
         "en" : {
@@ -129,18 +132,98 @@
         }
       }
     },
-    "remote_settings" : {
+    "remote_settings_open_app_settings" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "La télécommande ne fonctionne pas ? Lancez un nouveau scan en appuyant sur le bouton pour rechercher les équipements disponibles."
+            "value" : "Ouvrir les paramètres de l'application"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "La télécommande ne fonctionne pas ? Lancez un nouveau scan en appuyant sur le bouton pour rechercher les équipements disponibles."
+            "value" : "Ouvrir les paramètres de l'application"
+          }
+        }
+      }
+    },
+    "remote_settings_step_one" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1) Vérifiez que vous avez bien le paramètre 'Réseau local' activé dans vos paramètres"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1) Vérifiez que vous avez bien le paramètre 'Réseau local' activé dans vos paramètres"
+          }
+        }
+      }
+    },
+    "remote_settings_step_three" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3) Lancez un scan en appuyant sur le bouton pour détecter votre box"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3) Lancez un scan en appuyant sur le bouton pour détecter votre box"
+          }
+        }
+      }
+    },
+    "remote_settings_step_two" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "2) Assurez-vous d'avoir le Wi-Fi activé sur votre téléphone"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "2) Assurez-vous d'avoir le Wi-Fi activé sur votre téléphone"
+          }
+        }
+      }
+    },
+    "remote_settings_subtitle" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suivez ces étapes pour la configurer."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suivez ces étapes pour la configurer."
+          }
+        }
+      }
+    },
+    "remote_settings_title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La télécommande ne fonctionne pas ?"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La télécommande ne fonctionne pas ?"
           }
         }
       }
@@ -157,6 +240,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Une erreur est survenue"
+          }
+        }
+      }
+    },
+    "toast_validation_label" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connexion réussie"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connexion réussie"
           }
         }
       }

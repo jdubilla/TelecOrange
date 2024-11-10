@@ -29,10 +29,6 @@ struct RemoteView: View {
         .onAppear {
             vm.scanIpIfNeed()
         }
-        .onChange(of: vm.showToast) { newValue in
-            guard newValue else { return }
-            vm.showErrorToast()
-        }
         .overlay(
             ToastView()
                 .padding(.top, 20),
@@ -372,7 +368,60 @@ extension RemoteView {
                 .onTapGesture {
                     vm.setBoxIp(ip: ip)
                     vm.showSheet = false
+                    vm.showValidationToast()
                 }
+            }
+            
+            Spacer()
+        }
+        .padding()
+    }
+    
+    // MARK: SettingsView
+    @ViewBuilder
+    private func SettingsView() -> some View {
+        VStack(alignment: .center, spacing: 0) {
+            Text("remote_settings_title")
+                .font(.title2)
+                .fontWeight(.bold)
+                .multilineTextAlignment(.center)
+                .padding(.top)
+            
+            Text("remote_settings_subtitle")
+                .font(.title3)
+                .fontWeight(.medium)
+                .multilineTextAlignment(.center)
+            
+            VStack(alignment: .leading, spacing: 0) {
+                Text("remote_settings_step_one")
+                    .padding(.top, 64)
+                    .font(.headline)
+                    .fontWeight(.medium)
+                
+                Button("remote_settings_open_app_settings") {
+                    UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+                }
+                .buttonStyle(NextButtonStyle())
+                .padding(.top)
+                
+                Text("remote_settings_step_two")
+                    .font(.headline)
+                    .fontWeight(.medium)
+                    .padding(.top, 32)
+                
+                Text("remote_settings_step_three")
+                    .font(.headline)
+                    .fontWeight(.medium)
+                    .padding(.top, 32)
+                
+                Button("remote_scan_ips") {
+                    vm.resetBoxIp()
+                    vm.scanIpIfNeed()
+                    vm.showSettingsSheet = false
+                    vm.showValidationToast()
+                }
+                .buttonStyle(NextButtonStyle())
+                .padding(.top)
             }
             
             Spacer()
@@ -384,9 +433,9 @@ extension RemoteView {
     @ViewBuilder
     private func ToastView() -> some View {
         VStack {
-            Text("toast_error_label")
+            Text(vm.messageToast)
                 .padding()
-                .background(Color.red)
+                .background(vm.backgroundColorToast)
                 .cornerRadius(8)
                 .offset(y: vm.showToast ? 0 : -150)
                 .animation(.easeInOut, value: vm.showToast)
@@ -394,27 +443,5 @@ extension RemoteView {
                     vm.showToast = false
                 }
         }
-    }
-    
-    // MARK: SettingsView
-    @ViewBuilder
-    private func SettingsView() -> some View {
-        VStack(spacing: 0) {
-            Text("remote_settings")
-                .font(.title2)
-                .fontWeight(.bold)
-                .multilineTextAlignment(.center)
-                .padding(.vertical)
-            
-            Button("remote_scan_ips") {
-                vm.resetBoxIp()
-                vm.scanIpIfNeed()
-                vm.showSettingsSheet = false
-            }
-            .buttonStyle(NextButtonStyle())
-            .padding(.top)
-            
-        }
-        .padding()
     }
 }

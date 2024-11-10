@@ -51,6 +51,8 @@ enum RemoteKey: String {
 
 class RemoteViewModel: ObservableObject {
     @Published var showToast = false
+    @Published var messageToast: LocalizedStringKey = ""
+    @Published var backgroundColorToast = Color.red
     @Published var showSheet = false
     @Published var showSettingsSheet = false
     @Published var selectedIps: [String] = []
@@ -59,7 +61,7 @@ class RemoteViewModel: ObservableObject {
     func sendTVCommand(key: RemoteKey) {
         guard let url = URL(string: "http://\(boxIp):8080/remoteControl/cmd?operation=01&key=\(key.rawValue)&mode=0") else {
             DispatchQueue.main.async {
-                self.showToast = true
+                self.showErrorToast()
             }
             return
         }
@@ -71,17 +73,11 @@ class RemoteViewModel: ObservableObject {
             if let httpResponse = response as? HTTPURLResponse {
                 if httpResponse.statusCode != 200 {
                     DispatchQueue.main.async {
-                        self.showToast = true
+                        self.showErrorToast()
                     }
                 }
             }
         }.resume()
-    }
-    
-    func showErrorToast() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-            self.showToast = false
-        }
     }
     
     func generateTapticFeedback() {
@@ -96,9 +92,12 @@ class RemoteViewModel: ObservableObject {
                 let ips = await NetworkHelper.checkAllIPs()
                 if ips.count == 1, let ip = ips.first {
                     boxIp = ip
+                    showValidationToast()
                 } else if ips.count > 1 {
                     selectedIps = ips
                     showSheet = true
+                } else {
+                    showErrorToast()
                 }
             }
         }
@@ -110,5 +109,24 @@ class RemoteViewModel: ObservableObject {
     
     func setBoxIp(ip: String) {
         boxIp = ip
+    }
+    
+    func showErrorToast() {
+        messageToast = "toast_error_label"
+        backgroundColorToast = Color.red
+        showToastWithAnimation()
+    }
+    
+    func showValidationToast() {
+        messageToast = "toast_validation_label"
+        backgroundColorToast = Color.green
+        showToastWithAnimation()
+    }
+    
+    private func showToastWithAnimation() {
+        self.showToast = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+            self.showToast = false
+        }
     }
 }
